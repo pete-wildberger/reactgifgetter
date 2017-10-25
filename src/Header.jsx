@@ -17,7 +17,7 @@ const Header = (props: { showSearch?: boolean, handleSearchTermChange?: Function
   return (
     <header>
       <h1>
-        <Link to="/">svideo</Link>
+        <Link to="/">gifGetter!</Link>
       </h1>
       {utilSpace}
     </header>
