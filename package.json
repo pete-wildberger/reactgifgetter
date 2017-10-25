@@ -1,27 +1,27 @@
 {
-  "name": "reactgifgetter",
-  "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    "axios": "0.16.1",
-    "express": "^4.16.2",
-    "jest-cli": "^21.2.1",
-    "path": "^0.12.7",
-    "react": "^16.0.0",
-    "react-dom": "^16.0.0",
-    "react-router-dom": "4.2.2",
-    "react-scripts": "^1.0.14",
-    "styled-components": "2.0.0"
-  },
-  "devDependencies": {
-    "jest": "^21.2.1",
-    "jest-serializer-enzyme": "1.0.0",
-    "enzyme": "2.8.2"
-  },
+  "name": "gifgetter",
+  "version": "1.0.0",
+  "description": "a react gifgetter",
+  "main": "server.js",
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
-  }
+    "start": "node server.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "client": "npm run start --prefix client",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client",
+    "dev": "concurrently \"npm start\" \"npm run client\""
+  },
+  "author": "Peter Wildberger",
+  "license": "ISC",
+  "dependencies": {
+    "concurrently": "^3.5.0",
+    "express": "^4.15.4"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pete-wildberger/reactgifgetter.git"
+  },
+  "bugs": {
+    "url": "https://github.com/pete-wildberger/reactgifgetter/issues"
+  },
+  "homepage": "https://github.com/pete-wildberger/reactgifgetter#readme"
 }
