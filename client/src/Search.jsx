@@ -13,6 +13,7 @@ class Search extends Component {
     this.handleSearchTermChange = this.handleSearchTermChange.bind(this);
     this.randomGif = this.randomGif.bind(this);
     this.findGifs = this.findGifs.bind(this);
+    this.removeGif = this.removeGif.bind(this);
   }
 
   handleSearchTermChange = event => {
@@ -23,7 +24,7 @@ class Search extends Component {
       console.log(response);
       console.log(this.state);
       const posts = response.data.data;
-      this.setState({ apiObj: posts });
+      this.setState({ apiData: [], apiObj: posts });
     });
   }
   findGifs(term) {
@@ -34,6 +35,13 @@ class Search extends Component {
       console.log('Search.state ', this.state);
     });
   }
+  removeGif(id) {
+    let stateCopy = this.state;
+    let index = stateCopy.apiData.findIndex(gif => gif.id === id);
+    if (index === -1) return;
+    stateCopy.apiData.splice(index, 1);
+    this.setState(stateCopy);
+  }
   displayGif() {
     let gif;
     let gifs;
@@ -43,6 +51,7 @@ class Search extends Component {
         return (
           <div className="col-3" key={gif.id}>
             <img src={gif.images.downsized.url} alt={gif.images.downsized.url} />
+            <button onClick={() => this.removeGif(gif.id)}>X</button>
           </div>
         );
       });
@@ -56,12 +65,13 @@ class Search extends Component {
       );
     }
   }
+
   componentDidMount() {
     this.randomGif();
   }
   render() {
     return (
-      <div className="search">
+      <div>
         <Header searchTerm={this.state.searchTerm} showSearch handleSearchTermChange={this.handleSearchTermChange} />
         <button onClick={() => this.findGifs(this.state.searchTerm)}>Search Gifs</button>
         <button onClick={() => this.randomGif()}>Random Gif</button>
