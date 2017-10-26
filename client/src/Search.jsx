@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-// import GifCard from './GifCard';
 import Header from './Header';
-
-// import preload from '../data.json';
 
 class Search extends Component {
   constructor(props) {
@@ -14,10 +11,14 @@ class Search extends Component {
       apiObj: {}
     };
     this.handleSearchTermChange = this.handleSearchTermChange.bind(this);
+    this.randomGif = this.randomGif.bind(this);
     this.findGifs = this.findGifs.bind(this);
   }
 
-  componentDidMount() {
+  handleSearchTermChange = event => {
+    this.setState({ searchTerm: event.target.value });
+  };
+  randomGif() {
     axios.get('http://api.giphy.com/v1/gifs/random?api_key=dc6zaTOxFJmzC&tag=').then(response => {
       console.log(response);
       console.log(this.state);
@@ -25,9 +26,6 @@ class Search extends Component {
       this.setState({ apiObj: posts });
     });
   }
-  handleSearchTermChange = event => {
-    this.setState({ searchTerm: event.target.value });
-  };
   findGifs(term) {
     let searchURL = `http://api.giphy.com/v1/gifs/search?q=${term}&api_key=dc6zaTOxFJmzC`;
     axios.get(searchURL).then(response => {
@@ -43,7 +41,7 @@ class Search extends Component {
       gifs = this.state.apiData;
       return gifs.map(gif => {
         return (
-          <div key={gif.id}>
+          <div className="col-3" key={gif.id}>
             <img src={gif.images.downsized.url} alt={gif.images.downsized.url} />
           </div>
         );
@@ -52,18 +50,22 @@ class Search extends Component {
     if (this.state.apiObj != {}) {
       gif = this.state.apiObj;
       return (
-        <div key={gif.image_url}>
+        <div className="col-3" key={gif.image_url}>
           <img src={gif.image_url} alt={gif.image_url} />
         </div>
       );
     }
   }
+  componentDidMount() {
+    this.randomGif();
+  }
   render() {
     return (
       <div className="search">
         <Header searchTerm={this.state.searchTerm} showSearch handleSearchTermChange={this.handleSearchTermChange} />
-        <button onClick={() => this.findGifs(this.state.searchTerm)}>search</button>
-        <div>{this.displayGif()}</div>
+        <button onClick={() => this.findGifs(this.state.searchTerm)}>Search Gifs</button>
+        <button onClick={() => this.randomGif()}>Random Gif</button>
+        <div className="row">{this.displayGif()}</div>
       </div>
     );
   }

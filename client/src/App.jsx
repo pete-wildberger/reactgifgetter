@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Landing from './Landing';
 import Search from './Search';
+import './styles/main.min.css';
 
 const FourOhFour = () => <h1>Oh no 404</h1>;
 
