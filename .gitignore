@@ -5,8 +5,8 @@
 /coverage
 
 # production
-client/build
-client/node_modules
+/client/build
+/client/node_modules
 
 # misc
 .DS_Store
