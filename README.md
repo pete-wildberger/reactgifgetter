@@ -6,6 +6,7 @@ When you're in the root directory use ```npm install``` and then ```npm start```
 
 * Add a favorites section.
 * Post favorites to a database.
+* Display favorites in a new route.
 * Manage state using Redux.
 
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
