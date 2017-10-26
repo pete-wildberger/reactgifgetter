@@ -16,9 +16,7 @@ const Header = props => {
   }
   return (
     <header>
-      <h1>
-        <Link to="/">gifGetter!</Link>
-      </h1>
+      <h1>Giphy Gif Getter</h1>
       {utilSpace}
     </header>
   );

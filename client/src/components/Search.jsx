@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import Header from './Header';
-import Faves from './Faves';
+import Footer from './Footer';
 
 class Search extends Component {
   constructor(props) {
@@ -10,7 +10,8 @@ class Search extends Component {
     this.state = {
       searchTerm: '',
       apiData: [],
-      apiObj: {}
+      apiObj: {},
+      faves: []
     };
     this.handleSearchTermChange = this.handleSearchTermChange.bind(this);
     this.randomGif = this.randomGif.bind(this);
@@ -37,6 +38,7 @@ class Search extends Component {
       console.log('Search.state ', this.state);
     });
   }
+
   removeGif(id) {
     let stateCopy = this.state;
     let index = stateCopy.apiData.findIndex(gif => gif.id === id);
@@ -71,14 +73,15 @@ class Search extends Component {
   componentDidMount() {
     this.randomGif();
   }
+
   render() {
     return (
-      <div>
+      <div className="app">
         <Header searchTerm={this.state.searchTerm} showSearch handleSearchTermChange={this.handleSearchTermChange} />
         <button onClick={() => this.findGifs(this.state.searchTerm)}>Search Gifs</button>
         <button onClick={() => this.randomGif()}>Random Gif</button>
-        <Link to="/faves">See Faves</Link>
         <div className="row">{this.displayGif()}</div>
+        <Footer />
       </div>
     );
   }
