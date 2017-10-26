@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 import Header from './Header';
+import Faves from './Faves';
 
 class Search extends Component {
   constructor(props) {
@@ -75,6 +77,7 @@ class Search extends Component {
         <Header searchTerm={this.state.searchTerm} showSearch handleSearchTermChange={this.handleSearchTermChange} />
         <button onClick={() => this.findGifs(this.state.searchTerm)}>Search Gifs</button>
         <button onClick={() => this.randomGif()}>Random Gif</button>
+        <Link to="/faves">See Faves</Link>
         <div className="row">{this.displayGif()}</div>
       </div>
     );
