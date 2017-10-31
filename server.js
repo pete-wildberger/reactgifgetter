@@ -5,6 +5,8 @@ const express = require('express'),
 
 const port = process.env.PORT || 3004;
 
+var faves = [];
+
 app.use(express.static('client/build'));
 app.use(
   bodyParser.urlencoded({
@@ -13,7 +15,17 @@ app.use(
 );
 app.use(bodyParser.json());
 
-app.get('*', (req, res) => {
+app.post('/faves', (req, res) => {
+  faves = req.body.faves;
+  console.log('faves', faves);
+  res.sendStatus(200);
+});
+app.get('/faves', (req, res) => {
+  console.log('/faves hit');
+  res.send(faves);
+});
+
+app.get('/', (req, res) => {
   console.log('base url hit');
   res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
 });

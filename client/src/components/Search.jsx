@@ -17,6 +17,7 @@ class Search extends Component {
     this.randomGif = this.randomGif.bind(this);
     this.findGifs = this.findGifs.bind(this);
     this.removeGif = this.removeGif.bind(this);
+    this.faveGifs = this.faveGif.bind(this);
   }
 
   handleSearchTermChange = event => {
@@ -38,6 +39,21 @@ class Search extends Component {
       console.log('Search.state ', this.state);
     });
   }
+  faveGif(id) {
+    let stateCopy = this.state;
+    let index = stateCopy.apiData.findIndex(gif => gif.id === id);
+    if (index === -1) return;
+    stateCopy.faves.push(stateCopy.apiData[index]);
+    this.setState(stateCopy);
+    //send faves to server
+    let ots = {
+      faves: this.state.faves
+    };
+    axios.post('/faves', ots).then(response => {
+      console.log('response ', response);
+      console.log('Search.state ', this.state);
+    });
+  }
 
   removeGif(id) {
     let stateCopy = this.state;
@@ -56,6 +72,7 @@ class Search extends Component {
           <div className="col-3" key={gif.id}>
             <img src={gif.images.downsized.url} alt={gif.images.downsized.url} />
             <button onClick={() => this.removeGif(gif.id)}>X</button>
+            <button onClick={() => this.faveGif(gif.id)}>Like</button>
           </div>
         );
       });
@@ -80,6 +97,9 @@ class Search extends Component {
         <Header searchTerm={this.state.searchTerm} showSearch handleSearchTermChange={this.handleSearchTermChange} />
         <button onClick={() => this.findGifs(this.state.searchTerm)}>Search Gifs</button>
         <button onClick={() => this.randomGif()}>Random Gif</button>
+        <Link to="/faves">
+          <button>Faves</button>
+        </Link>
         <div className="row">{this.displayGif()}</div>
         <Footer />
       </div>
