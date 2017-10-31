@@ -5,7 +5,7 @@
 /coverage
 
 # production
-/client/src
+/client/build
 /client/node_modules
 /client/src/styles/main.min.css
 
