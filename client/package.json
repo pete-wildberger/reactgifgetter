@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "axios": "0.16.1",
+    "enzyme-adapter-react-16": "^1.0.4",
     "express": "^4.16.2",
     "jest-cli": "^21.2.1",
     "path": "^0.12.7",
@@ -11,12 +12,13 @@
     "react-dom": "^16.0.0",
     "react-router-dom": "4.2.2",
     "react-scripts": "^1.0.14",
+    "react-test-renderer": "^16.0.0",
     "styled-components": "2.0.0"
   },
   "devDependencies": {
+    "enzyme": "^3.1.1",
     "jest": "^21.2.1",
-    "jest-serializer-enzyme": "1.0.0",
-    "enzyme": "2.8.2"
+    "jest-serializer-enzyme": "1.0.0"
   },
   "scripts": {
     "start": "react-scripts start",
